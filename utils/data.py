@@ -149,8 +149,9 @@ def worker_init_fn(worker_id):
     set_seed(GLOBAL_SEED + worker_id)
 
 def get_dataloader(data_set, bs, **kwargs):
+    kwargs["num_workers"] = 8
     return DataLoader(  data_set, batch_size = bs,
                         shuffle=False, pin_memory = True, 
-                        worker_init_fn=worker_init_fn, **kwargs
+                        worker_init_fn=worker_init_fn, **kwargs,
                     )
 
